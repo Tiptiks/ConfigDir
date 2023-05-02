@@ -1,0 +1,38 @@
+# set-option -g mouse on
+set -g prefix C-a #
+unbind C-b # C-b即Ctrl+b键，unbind意味着解除绑定
+bind C-a send-prefix # 绑定Ctrl+a为新的指令前缀
+
+# 从tmux v1.6版起，支持设置第二个指令前缀
+set-option -g prefix2 ` # 设置一个不常用的`键作为指令前缀，按键更快些
+
+# buffer缓存复制到Linux系统粘贴板
+bind C-c run " tmux save-buffer - | xclip -i -sel clipboard"
+# Linux系统粘贴板内容复制到会话
+bind C-v run " tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
+
+
+set -g default-terminal "screen-256color"
+
+set-option -sg escape-time 10
+
+# ---------------------------------
+# 分割窗格
+unbind '"'
+bind - splitw -v
+unbind %
+bind | splitw -h 
+
+bind-key - split-window -c "#{pane_current_path}"
+bind-key | split-window -h -c "#{pane_current_path}"
+
+# --------------------------------
+# 设置编号
+set-option -g base-index 1
+set-window-option -g pane-base-index 1
+
+# -------------------------------------
+# 窗口移动
+bind k selectp -U
+bind j selectp -D
+bind h selectp -L
