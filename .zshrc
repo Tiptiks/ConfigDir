@@ -115,24 +115,10 @@ autoload -U compinit && compinit
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-function set_proxy() {
- # 自动获取宿主 Windows 的 IP 地址
-  proxy_server=`cat /etc/resolv.conf|grep nameserver|awk '{print $2}'`
- # 改成你的 http_proxy（局域网）端口号
-  proxy_port=7890
-  export http_proxy=http://$proxy_server:$proxy_port
-  export HTTP_PROXY=$http_proxy
-  export https_proxy=$http_proxy
-  export HTTPS_PROXY=$http_proxy
-}
 
-function unset_proxy() {
-  unset http_proxy HTTP_PROXY https_proxy HTTPS_PROXY
-  curl -s "https://ip.jackjyq.com" | grep -E -i "ip:|country:"
-}
 
-alias nvim='/home/binw/11-tools/neovim/nvim-linux64/bin/nvim'
-export PATH=$PATH:/home/binw/11-tools/NodeJs/node-v18.16.0-linux-x64/bin
+alias nvim='/home/xxx/11-tools/neovim/nvim-linux64/bin/nvim'
+export PATH=$PATH:/home/xxx/11-tools/NodeJs/node-v18.16.0-linux-x64/bin
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
